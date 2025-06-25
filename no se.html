@@ -10,809 +10,870 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #f093fb, #f5576c);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            min-height: 100vh;
-            overflow-x: hidden;
+            color: var(--text-color);
+            background-color: var(--light-bg);
         }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .floating-shapes {
+        
+        /* Navigation */
+        .nav-container {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+            right: 0;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            z-index: 1000;
         }
-
-        .shape {
+        
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .nav-menu {
+            position: relative;
+        }
+        
+        .nav-toggle {
+            background: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .nav-toggle:hover {
+            background: #2980b9;
+        }
+        
+        .dropdown {
             position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: var(--transition);
         }
-
-        .shape:nth-child(1) { width: 80px; height: 80px; left: 10%; animation-delay: 0s; }
-        .shape:nth-child(2) { width: 60px; height: 60px; left: 20%; animation-delay: 2s; }
-        .shape:nth-child(3) { width: 100px; height: 100px; left: 35%; animation-delay: 4s; }
-        .shape:nth-child(4) { width: 40px; height: 40px; left: 50%; animation-delay: 6s; }
-        .shape:nth-child(5) { width: 70px; height: 70px; left: 70%; animation-delay: 8s; }
-        .shape:nth-child(6) { width: 90px; height: 90px; left: 85%; animation-delay: 10s; }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        
+        .dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
-
+        
+        .dropdown a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .dropdown a:hover {
+            background: var(--light-bg);
+            color: var(--secondary-color);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            margin-top: 80px;
+        }
+        
         .hero {
             text-align: center;
-            padding: 100px 0;
-            color: white;
-            position: relative;
-            z-index: 2;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            margin: 0 -2rem 3rem -2rem;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
         }
-
+        
         .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 900;
-            margin-bottom: 30px;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
-            animation: titleGlow 3s ease-in-out infinite alternate;
-            background: linear-gradient(45deg, #fff, #f8f9fa, #fff);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
         }
-
-        @keyframes titleGlow {
-            0% { 
-                filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
-                transform: scale(1);
-            }
-            100% { 
-                filter: drop-shadow(0 0 30px rgba(255,255,255,0.8));
-                transform: scale(1.02);
-            }
-        }
-
+        
         .hero p {
-            font-size: 1.5rem;
-            max-width: 900px;
-            margin: 0 auto 50px;
-            opacity: 0.95;
-            animation: fadeInUp 1s ease-out 0.5s both;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            font-weight: 300;
-        }
-
-        .main-content {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 30px 30px 0 0;
-            padding: 80px 0;
-            margin-top: 60px;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 -20px 40px rgba(0,0,0,0.1);
-        }
-
-        .intro-section {
-            text-align: center;
-            margin-bottom: 80px;
-            padding: 0 20px;
-        }
-
-        .intro-section h2 {
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 40px;
-            position: relative;
-            font-weight: 800;
-            animation: textShine 4s ease-in-out infinite;
-        }
-
-        @keyframes textShine {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        .intro-section h2::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 6px;
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #f093fb);
-            border-radius: 3px;
-            animation: rainbowShift 3s linear infinite;
-        }
-
-        @keyframes rainbowShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-
-        .intro-text {
-            font-size: 1.4rem;
-            color: #555;
-            max-width: 1000px;
-            margin: 0 auto;
-            line-height: 1.9;
-            font-weight: 300;
-        }
-
-        .health-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            padding: 0 20px;
-            margin-bottom: 80px;
-        }
-
-        .health-card {
-            background: linear-gradient(145deg, #ffffff, #f8f9fa);
-            border-radius: 25px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-            border: 3px solid transparent;
-        }
-
-        .health-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--card-gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-            border-radius: 22px;
-        }
-
-        .health-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: var(--card-gradient);
-            border-radius: 25px 25px 0 0;
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .health-card:hover::after {
-            transform: scaleX(1);
-        }
-
-        .health-card:hover::before {
-            opacity: 0.05;
-        }
-
-        .health-card:hover {
-            transform: translateY(-20px) scale(1.05);
-            box-shadow: 0 35px 60px rgba(0,0,0,0.2);
-            border-color: var(--card-color);
-        }
-
-        .physical { 
-            --card-gradient: linear-gradient(135deg, #ff6b6b, #ee5a24, #fd79a8);
-            --card-color: #ff6b6b;
-        }
-        .social { 
-            --card-gradient: linear-gradient(135deg, #4ecdc4, #44a08d, #00d2ff);
-            --card-color: #4ecdc4;
-        }
-        .emotional { 
-            --card-gradient: linear-gradient(135deg, #fd79a8, #fdcb6e, #e84393);
-            --card-color: #fd79a8;
-        }
-        .psychological { 
-            --card-gradient: linear-gradient(135deg, #667eea, #764ba2, #a8edea);
-            --card-color: #667eea;
-        }
-        .spiritual { 
-            --card-gradient: linear-gradient(135deg, #ffecd2, #fcb69f, #ff9a8b);
-            --card-color: #ffecd2;
-        }
-        .environmental { 
-            --card-gradient: linear-gradient(135deg, #a8e6cf, #88d8a3, #a8e6cf);
-            --card-color: #a8e6cf;
-        }
-
-        .card-icon {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 25px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-            background: var(--card-gradient);
-            animation: iconBounce 3s ease-in-out infinite;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            position: relative;
-        }
-
-        .card-icon::before {
-            content: '';
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: var(--card-gradient);
-            opacity: 0.3;
-            animation: iconPulse 2s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        @keyframes iconBounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        @keyframes iconPulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.2); opacity: 0.1; }
-        }
-
-        .health-card h3 {
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-            color: #2d3748;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .health-card p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-            font-weight: 300;
-        }
-
-        .health-card ul {
-            text-align: left;
-            color: #555;
-            margin-top: 25px;
-        }
-
-        .health-card li {
-            margin-bottom: 12px;
-            position: relative;
-            padding-left: 25px;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .health-card li::before {
-            content: '✨';
-            position: absolute;
-            left: 0;
             font-size: 1.2rem;
-            animation: sparkle 2s ease-in-out infinite;
-        }
-
-        .health-card:hover li {
-            color: #333;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.2); }
-        }
-
-        /* Nuevas secciones */
-        .tips-section {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 80px 0;
-            margin: 80px 0;
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tips-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: backgroundMove 30s linear infinite;
-        }
-
-        @keyframes backgroundMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-100px, -100px); }
-        }
-
-        .tips-section h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 50px;
-            font-weight: 800;
-            position: relative;
-            z-index: 2;
-        }
-
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .tip-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .tip-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .tip-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #fff;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .tip-card p {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-        }
-
-        .habits-section {
-            padding: 80px 0;
-            background: rgba(255, 255, 255, 0.8);
-            margin: 40px 0;
-            border-radius: 30px;
-        }
-
-        .habits-section h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 50px;
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-
-        .habits-timeline {
-            position: relative;
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
+            opacity: 0.9;
         }
-
-        .habits-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, #ff6b6b, #4ecdc4, #667eea, #f093fb);
-            border-radius: 2px;
-        }
-
-        .habit-item {
-            position: relative;
-            margin: 40px 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .habit-item:nth-child(odd) {
-            justify-content: flex-start;
-        }
-
-        .habit-item:nth-child(even) {
-            justify-content: flex-end;
-        }
-
-        .habit-content {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            width: 45%;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .habit-content:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .habit-item:nth-child(odd) .habit-content::after {
-            content: '';
-            position: absolute;
-            right: -10px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 10px solid white;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-        }
-
-        .habit-item:nth-child(even) .habit-content::after {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-right: 10px solid white;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-        }
-
-        .habit-number {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
-            z-index: 10;
-        }
-
-        .nutrition-section {
-            background: linear-gradient(135deg, #a8e6cf, #88d8a3);
-            padding: 80px 0;
-            margin: 80px 0;
-            border-radius: 30px;
-        }
-
-        .nutrition-section h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 50px;
-            color: #2d5016;
-            font-weight: 800;
-        }
-
-        .nutrition-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-        }
-
-        .nutrition-card {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 3px solid transparent;
-        }
-
-        .nutrition-card:hover {
-            transform: translateY(-10px);
-            border-color: #88d8a3;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .nutrition-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .exercise-section {
-            padding: 80px 0;
-            background: rgba(255, 255, 255, 0.9);
-            margin: 40px 0;
-            border-radius: 30px;
-        }
-
-        .exercise-section h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 50px;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 800;
-        }
-
-        .exercise-types {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .exercise-card {
-            background: linear-gradient(145deg, #fff, #f8f9fa);
-            border-radius: 20px;
-            padding: 30px;
-            border-left: 5px solid #ff6b6b;
-            transition: all 0.3s ease;
-        }
-
-        .exercise-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        .mental-health-section {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 80px 0;
-            margin: 80px 0;
-            border-radius: 30px;
-        }
-
-        .mental-health-section h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 50px;
-            font-weight: 800;
-        }
-
-        .mental-techniques {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .technique-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .technique-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-5px);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .footer {
-            background: linear-gradient(135deg, #2d3748, #4a5568, #667eea);
-            color: white;
-            text-align: center;
-            padding: 60px 0;
-            margin-top: 80px;
-            position: relative;
+        
+        /* Sections */
+        .section {
+            margin-bottom: 4rem;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
             overflow: hidden;
-            border-radius: 30px 30px 0 0;
         }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 20"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="30" cy="15" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="5" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="12" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="8" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
-            animation: starsMove 20s linear infinite;
+        
+        .section-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
         }
-
-        @keyframes starsMove {
-            0% { transform: translateX(-100px); }
-            100% { transform: translateX(100px); }
+        
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 400;
         }
-
-        .footer p {
+        
+        .section-content {
+            padding: 2rem;
+        }
+        
+        .subsection {
+            margin-bottom: 2rem;
+        }
+        
+        .subsection h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
             font-size: 1.3rem;
-            opacity: 0.95;
-            font-weight: 300;
-            z-index: 2;
-            position: relative;
-            animation: footerGlow 4s ease-in-out infinite alternate;
+            font-weight: 500;
         }
-
-        @keyframes footerGlow {
-            0% { text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-            100% { text-shadow: 0 0 20px rgba(255,255,255,0.8); }
+        
+        .subsection p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
         }
-
+        
+        .subsection ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subsection li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .card {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        /* Video and Image Placeholders */
+        .media-placeholder {
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            border-radius: var(--border-radius);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .video-placeholder {
+            height: 300px;
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            color: var(--white);
+        }
+        
+        /* Interactive Elements */
+        .quiz-container {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin: 2rem 0;
+        }
+        
+        .quiz-question {
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quiz-option {
+            padding: 0.5rem;
+            background: var(--white);
+            border: 2px solid transparent;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--secondary-color);
+        }
+        
+        .quiz-option.selected {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+        
+        .tips-container {
+            background: #e8f5e8;
+            border-left: 4px solid #27ae60;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1rem 0;
+        }
+        
+        .tips-container h4 {
+            color: #27ae60;
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
+            .nav {
+                padding: 1rem;
+            }
+            
             .hero h1 {
-                font-size: 3rem;
+                font-size: 2rem;
             }
             
             .hero p {
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
             
-            .intro-section h2 {
-                font-size: 2.5rem;
+            .section-content {
+                padding: 1rem;
             }
             
-            .health-grid,
-            .tips-grid,
-            .nutrition-grid,
-            .exercise-types,
-            .mental-techniques {
+            .card-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
             }
-            
-            .card-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 2.5rem;
-            }
-
-            .habits-timeline::before {
-                left: 20px;
-            }
-
-            .habit-item {
-                justify-content: flex-end !important;
-            }
-
-            .habit-content {
-                width: calc(100% - 60px);
-                margin-left: 40px;
-            }
-
-            .habit-number {
-                left: 20px;
-                transform: none;
-            }
-
-            .habit-content::after {
-                display: none;
-            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--secondary-color);
+            color: var(--white);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #2980b9;
         }
     </style>
 </head>
 <body>
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-
-    <div class="hero">
-        <div class="container">
-            <h1>🌟 VIDA SALUDABLE 🌟</h1>
-            <p>Descubre el camino hacia un bienestar integral que transforma tu vida. Una vida saludable no es solo la ausencia de enfermedad, sino un estado completo de bienestar físico, mental y social que te permite alcanzar tu máximo potencial y disfrutar plenamente cada día.</p>
-        </div>
-    </div>
-
-    <div class="main-content">
-        <div class="container">
-            <div class="intro-section">
-                <h2>¿QUÉ ES UNA VIDA SALUDABLE?</h2>
-                <p class="intro-text">
-                    Una vida saludable es mucho más que seguir una dieta o hacer ejercicio ocasionalmente. Es un estilo de vida integral que abarca todos los aspectos de nuestro ser: físico, social, emocional y psicológico. Implica tomar decisiones conscientes que nutren nuestro cuerpo, mente y relaciones, creando un equilibrio armónico que nos permite prosperar en todas las áreas de nuestra existencia.
-                </p>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav">
+            <div class="logo">🌱 Vida Saludable</div>
+            <div class="nav-menu">
+                <button class="nav-toggle">Menú ▼</button>
+                <div class="dropdown">
+                    <a href="#salud-fisica">Salud Física</a>
+                    <a href="#salud-mental">Salud Mental</a>
+                    <a href="#alimentacion">Alimentación</a>
+                    <a href="#ejercicio">Ejercicio</a>
+                    <a href="#bienestar-emocional">Bienestar Emocional</a>
+                    <a href="#relaciones">Relaciones</a>
+                </div>
             </div>
+        </div>
+    </nav>
 
-            <div class="health-grid">
-                <div class="health-card physical">
-                    <div class="card-icon">💪</div>
-                    <h3>Salud Física</h3>
-                    <p>La base de nuestro bienestar radica en cuidar nuestro cuerpo a través de hábitos que fortalecen y nutren nuestro organismo.</p>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Vida Saludable</h1>
+            <p>Tu guía completa para alcanzar un bienestar integral a través del equilibrio entre cuerpo, mente y emociones</p>
+        </section>
+
+        <!-- Salud Física -->
+        <section id="salud-fisica" class="section">
+            <div class="section-header">
+                <h2>🏃‍♀️ Salud Física</h2>
+                <p>La base fundamental de tu bienestar general</p>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>¿Qué es la Salud Física?</h3>
+                    <p>La salud física es el estado de completo bienestar del cuerpo, caracterizado por el funcionamiento óptimo de todos los sistemas corporales. No se trata solo de la ausencia de enfermedad, sino de mantener una condición física que nos permita realizar nuestras actividades diarias con energía y vitalidad.</p>
+                    
+                    
+                </div>
+
+                <div class="subsection">
+                    <h3>Componentes Esenciales</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>💪 Fuerza Muscular</h4>
+                            <p>Capacidad de los músculos para generar fuerza. Se desarrolla con ejercicios de resistencia como pesas, bandas elásticas o peso corporal.</p>
+                        </div>
+                        <div class="card">
+                            <h4>❤️ Resistencia Cardiovascular</h4>
+                            <p>Eficiencia del corazón y pulmones para suministrar oxígeno durante actividades prolongadas.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🤸‍♀️ Flexibilidad</h4>
+                            <p>Rango de movimiento de las articulaciones. Esencial para prevenir lesiones y mantener la movilidad.</p>
+                        </div>
+                        <div class="card">
+                            <h4>⚖️ Composición Corporal</h4>
+                            <p>Proporción adecuada entre masa muscular, grasa corporal y densidad ósea.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">🤔 Pregunta: ¿Cuántos minutos de ejercicio moderado recomienda la OMS por semana?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this)">A) 75 minutos</div>
+                        <div class="quiz-option" onclick="selectOption(this)">B) 150 minutos</div>
+                        <div class="quiz-option" onclick="selectOption(this)">C) 300 minutos</div>
+                    </div>
+                    <div class="quiz-answer" style="display: none;">
+                        ✅ Respuesta correcta: B) La autoconciencia es la base de la inteligencia emocional. Sin conocer tus propias emociones, es imposible regularlas o entender las de otros.
+                    </div>
+                </div>
+
+                <div class="tips-container">
+                    <h4>💡 Ejercicios para Desarrollar Bienestar Emocional</h4>
                     <ul>
-                        <li>Ejercicio regular y actividad física diaria</li>
-                        <li>Alimentación balanceada y nutritiva</li>
-                        <li>Descanso adecuado de 7-9 horas diarias</li>
-                        <li>Hidratación constante (8 vasos de agua al día)</li>
-                        <li>Chequeos médicos preventivos anuales</li>
-                        <li>Evitar hábitos nocivos como fumar y alcohol excesivo</li>
-                        <li>Mantener un peso saludable</li>
-                        <li>Exposición moderada al sol para vitamina D</li>
+                        <li>Practica el "check-in emocional": pregúntate cómo te sientes 3 veces al día</li>
+                        <li>Usa la técnica STOP: para, toma un respiro, observa, procede conscientemente</li>
+                        <li>Escribe tus emociones sin juzgarlas, solo observándolas</li>
+                        <li>Practica la compasión contigo mismo como lo harías con un buen amigo</li>
+                        <li>Desarrolla un ritual de relajación: baño, música, lectura antes de dormir</li>
                     </ul>
                 </div>
 
-                <div class="health-card social">
-                    <div class="card-icon">🤝</div>
-                    <h3>Salud Social</h3>
-                    <p>Nuestras conexiones humanas son fundamentales para el bienestar. Las relaciones saludables nos brindan apoyo, alegría y sentido de pertenencia.</p>
+                
+            </div>
+        </section>
+
+        <!-- Relaciones Saludables -->
+        <section id="relaciones" class="section">
+            <div class="section-header">
+                <h2>🤝 Relaciones Saludables</h2>
+                <p>Construye conexiones significativas y duraderas</p>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Los Fundamentos de las Relaciones Saludables</h3>
+                    <p>Las relaciones saludables se construyen sobre pilares sólidos de respeto mutuo, comunicación efectiva y apoyo emocional. No se trata solo de relaciones románticas, sino de todas nuestras conexiones: familia, amistades, colegas y la comunidad. Las investigaciones muestran que las personas con relaciones fuertes viven más tiempo y tienen mejor salud mental y física.</p>
+                    
+                   
+                </div>
+
+                <div class="subsection">
+                    <h3>Tipos de Relaciones en tu Vida</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>👨‍👩‍👧‍👦 Relaciones Familiares</h4>
+                            <p>Vínculos de sangre o adopción. Requieren paciencia, límites claros y aceptación de diferencias generacionales.</p>
+                        </div>
+                        <div class="card">
+                            <h4>👫 Amistades</h4>
+                            <p>Conexiones elegidas basadas en intereses, valores y apoyo mutuo. Esenciales para el bienestar emocional.</p>
+                        </div>
+                        <div class="card">
+                            <h4>💼 Relaciones Profesionales</h4>
+                            <p>Interacciones en el trabajo. Requieren profesionalismo, respeto y colaboración efectiva.</p>
+                        </div>
+                        <div class="card">
+                            <h4>💕 Relaciones Románticas</h4>
+                            <p>Vínculos íntimos basados en amor, compromiso y crecimiento mutuo. Requieren trabajo constante y comunicación.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">🤔 Pregunta: ¿Cuál es la característica MÁS importante en una relación saludable?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this)">A) Tener los mismos intereses</div>
+                        <div class="quiz-option" onclick="selectOption(this)">B) Comunicación honesta y respetuosa</div>
+                        <div class="quiz-option" onclick="selectOption(this)">C) Pasar todo el tiempo juntos</div>
+                    </div>
+                    <div class="quiz-answer" style="display: none;">
+                        ✅ Respuesta correcta: B) La comunicación honesta y respetuosa es la base de todas las relaciones saludables. Permite resolver conflictos, expresar necesidades y mantener la confianza.
+                    </div>
+                </div>
+
+                <div class="tips-container">
+                    <h4>💡 Claves para Mejorar tus Relaciones</h4>
                     <ul>
-                        <li>Cultivar relaciones significativas y auténticas</li>
-                        <li>Participar en actividades comunitarias</li>
-                        <li>Comunicación efectiva y empática</li>
-                        <li>Establecer límites saludables</li>
-                        <li>Practicar la gratitud y el apoyo mutuo</li>
-                        <li>Desarrollar habilidades sociales</li>
-                        <li>Buscar ayuda cuando la necesites</li>
-                        <li>Contribuir al bienestar de otros</li>
+                        <li>Practica la escucha activa: enfócate completamente en la otra persona</li>
+                        <li>Expresa gratitud regularmente: di "gracias" por las pequeñas cosas</li>
+                        <li>Establece límites claros y respeta los de otros</li>
+                        <li>Resuelve conflictos rápidamente, no dejes que se acumulen</li>
+                        <li>Dedica tiempo de calidad sin distracciones (celulares, TV)</li>
+                        <li>Aprende a disculparte genuinamente cuando cometas errores</li>
                     </ul>
                 </div>
 
-                <div class="health-card emotional">
-                    <div class="card-icon">❤</div>
-                    <h3>Salud Emocional</h3>
-                    <p>Reconocer, comprender y gestionar nuestras emociones de manera saludable es clave para una vida plena y equilibrada.</p>
+                
+            </div>
+        </section>
+
+        <!-- Sección de Recursos Adicionales -->
+        <section class="section">
+            <div class="section-header">
+                <h2>📚 Recursos Adicionales</h2>
+                <p>Herramientas y referencias para profundizar tu conocimiento</p>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Apps Recomendadas</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>🧘‍♀️ Meditación</h4>
+                            <p>Headspace, Calm, Insight Timer - Para mindfulness y relajación</p>
+                        </div>
+                        <div class="card">
+                            <h4>🏃‍♂️ Ejercicio</h4>
+                            <p>Nike Training, Strava, MyFitnessPal - Para tracking y rutinas</p>
+                        </div>
+                        <div class="card">
+                            <h4>🍎 Nutrición</h4>
+                            <p>Cronometer, Yazio, PlantNet - Para control nutricional</p>
+                        </div>
+                        <div class="card">
+                            <h4>😴 Sueño</h4>
+                            <p>Sleep Cycle, Noisli, Forest - Para mejor descanso</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Plan de Acción Personal</h3>
+                    <div class="tips-container">
+                        <h4>🎯 Tu Hoja de Ruta hacia el Bienestar</h4>
+                        <p><strong>Semana 1-2:</strong> Establece rutinas básicas (horario de sueño, 3 comidas balanceadas, 20 min de actividad física)</p>
+                        <p><strong>Semana 3-4:</strong> Añade práctica de mindfulness (5 min/día) y mejora la hidratación</p>
+                        <p><strong>Mes 2:</strong> Incrementa ejercicio a 30 min, incorpora ejercicios de fuerza 2x/semana</p>
+                        <p><strong>Mes 3:</strong> Enfócate en relaciones: programa tiempo con seres queridos, practica comunicación asertiva</p>
+                        <p><strong>Mes 4-6:</strong> Consolida hábitos y añade nuevos desafíos según tus objetivos específicos</p>
+                    </div>
+                </div>
+
+                
+            </div>
+        </section>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Navigation dropdown
+        const navToggle = document.querySelector('.nav-toggle');
+        const dropdown = document.querySelector('.dropdown');
+
+        navToggle.addEventListener('click', () => {
+            dropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-menu')) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Quiz functionality
+        function selectOption(option) {
+            // Remove previous selections
+            const options = option.parentNode.querySelectorAll('.quiz-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Select current option
+            option.classList.add('selected');
+            
+            // Show answer
+            const answer = option.parentNode.parentNode.querySelector('.quiz-answer');
+            setTimeout(() => {
+                answer.style.display = 'block';
+            }, 500);
+        }
+
+        // Back to top button
+        const backToTop = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.dropdown a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                const navHeight = document.querySelector('.nav-container').offsetHeight;
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - navHeight - 20,
+                    behavior: 'smooth'
+                });
+                
+                dropdown.classList.remove('active');
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+
+                <div class="tips-container">
+                    <h4>💡 Consejos Prácticos</h4>
                     <ul>
-                        <li>Autoconocimiento emocional profundo</li>
-                        <li>Expresión adecuada de sentimientos</li>
-                        <li>Desarrollo de inteligencia emocional</li>
-                        <li>Práctica de la autocompasión</li>
-                        <li>Gestión del estrés y la ansiedad</li>
-                        <li>Búsqueda de alegría y momentos felices</li>
-                        <li>Procesamiento saludable de traumas</li>
-                        <li>Cultivar la resiliencia emocional</li>
+                        <li>Comienza con 10 minutos de caminata diaria y aumenta gradualmente</li>
+                        <li>Usa las escaleras en lugar del ascensor cuando sea posible</li>
+                        <li>Mantén una botella de agua cerca para recordar hidratarte</li>
+                        <li>Establece recordatorios para levantarte cada hora si trabajas sentado</li>
+                        <li>Duerme en un horario consistente, incluso los fines de semana</li>
                     </ul>
                 </div>
 
-                <div class="
+                
+            </div>
+        </section>
+
+        <!-- Salud Mental -->
+        <section id="salud-mental" class="section">
+            <div class="section-header">
+                <h2>🧠 Salud Mental</h2>
+                <p>El bienestar de tu mente es tan importante como el de tu cuerpo</p>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Comprendiendo la Salud Mental</h3>
+                    <p>La salud mental abarca nuestro bienestar emocional, psicológico y social. Influye en cómo pensamos, sentimos y actuamos. También determina cómo manejamos el estrés, nos relacionamos con otros y tomamos decisiones saludables.</p>
+                    
+                    
+                </div>
+
+                <div class="subsection">
+                    <h3>Señales de Alerta</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>😴 Cambios en el Sueño</h4>
+                            <p>Insomnio persistente, dormir demasiado o pesadillas frecuentes pueden indicar problemas de salud mental.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🍽️ Alteraciones del Apetito</h4>
+                            <p>Pérdida significativa del apetito o comer en exceso pueden ser síntomas de estrés o depresión.</p>
+                        </div>
+                        <div class="card">
+                            <h4>😞 Estado de Ánimo</h4>
+                            <p>Tristeza persistente, irritabilidad extrema o cambios de humor drásticos requieren atención.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🤝 Aislamiento Social</h4>
+                            <p>Evitar constantemente a amigos, familia o actividades sociales que antes disfrutabas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">🤔 Pregunta: ¿Cuál es una técnica efectiva para manejar el estrés agudo?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this)">A) Respiración profunda 4-7-8</div>
+                        <div class="quiz-option" onclick="selectOption(this)">B) Consumir cafeína</div>
+                        <div class="quiz-option" onclick="selectOption(this)">C) Evitar el problema completamente</div>
+                    </div>
+                    <div class="quiz-answer" style="display: none;">
+                        ✅ Respuesta correcta: A) La técnica de respiración 4-7-8 (inhalar 4 seg, retener 7 seg, exhalar 8 seg) activa el sistema nervioso parasimpático, reduciendo el estrés inmediatamente.
+                    </div>
+                </div>
+
+                <div class="tips-container">
+                    <h4>💡 Estrategias Diarias para la Salud Mental</h4>
+                    <ul>
+                        <li>Practica 5 minutos de meditación o mindfulness al despertar</li>
+                        <li>Lleva un diario de gratitud, escribiendo 3 cosas positivas cada día</li>
+                        <li>Limita el tiempo en redes sociales a 30 minutos diarios</li>
+                        <li>Conecta con la naturaleza, aunque sea observando plantas desde tu ventana</li>
+                        <li>Busca ayuda profesional si sientes que no puedes manejar tus emociones</li>
+                    </ul>
+                </div>
+
+                
+            </div>
+        </section>
+
+        <!-- Alimentación Saludable -->
+        <section id="alimentacion" class="section">
+            <div class="section-header">
+                <h2>🥗 Alimentación Saludable</h2>
+                <p>Nutre tu cuerpo con los alimentos correctos</p>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Fundamentos de la Nutrición</h3>
+                    <p>Una alimentación saludable no se trata de restricciones estrictas o privarse de los alimentos que amas. Se trata de sentirse bien, tener más energía y mejorar tu salud. Los macronutrientes (carbohidratos, proteínas y grasas) y micronutrientes (vitaminas y minerales) trabajan juntos para mantener tu cuerpo funcionando óptimamente.</p>
+                    
+                   
+                </div>
+
+                <div class="subsection">
+                    <h3>Los Súper Alimentos</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>🥬 Vegetales de Hoja Verde</h4>
+                            <p>Espinacas, kale, acelgas: ricos en hierro, ácido fólico y antioxidantes. Ideales para la salud cardiovascular.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🐟 Pescados Grasos</h4>
+                            <p>Salmón, sardinas, atún: fuentes de omega-3, esenciales para la salud cerebral y cardiovascular.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🫐 Frutos Rojos</h4>
+                            <p>Arándanos, fresas, moras: antioxidantes naturales que protegen contra el envejecimiento celular.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🥜 Frutos Secos</h4>
+                            <p>Almendras, nueces, pistachos: grasas saludables, proteínas y fibra para la saciedad y energía.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">🤔 Pregunta: ¿Cuál es la recomendación diaria de porciones de frutas y verduras?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this)">A) 3 porciones</div>
+                        <div class="quiz-option" onclick="selectOption(this)">B) 5 porciones</div>
+                        <div class="quiz-option" onclick="selectOption(this)">C) 7 porciones</div>
+                    </div>
+                    <div class="quiz-answer" style="display: none;">
+                        ✅ Respuesta correcta: B) 5 porciones. La OMS recomienda al menos 400g de frutas y verduras al día, equivalente a 5 porciones de 80g cada una.
+                    </div>
+                </div>
+
+                <div class="tips-container">
+                    <h4>💡 Hábitos Alimentarios Saludables</h4>
+                    <ul>
+                        <li>Come despacio y mastica bien para mejorar la digestión</li>
+                        <li>Planifica tus comidas semanalmente para evitar decisiones impulsivas</li>
+                        <li>Mantén snacks saludables (frutas, nueces) siempre disponibles</li>
+                        <li>Bebe un vaso de agua antes de cada comida</li>
+                        <li>Practica el "plato saludable": 1/2 vegetales, 1/4 proteína, 1/4 carbohidratos complejos</li>
+                    </ul>
+                </div>
+
+               
+            </div>
+        </section>
+
+        <!-- Ejercicio y Actividad Física -->
+        <section id="ejercicio" class="section">
+            <div class="section-header">
+                <h2>🏋️‍♀️ Ejercicio y Actividad Física</h2>
+                <p>Mueve tu cuerpo, fortalece tu vida</p>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Tipos de Ejercicio</h3>
+                    <p>Un programa de ejercicio completo incluye cuatro tipos principales de actividad física. Cada uno ofrece beneficios únicos y juntos crean un enfoque integral para el fitness y la salud a largo plazo.</p>
+                    
+                    
+                </div>
+
+                <div class="subsection">
+                    <h3>Programa de Ejercicio Semanal</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>🏃‍♂️ Lunes - Cardio</h4>
+                            <p>30 min de caminata rápida o trote suave. Fortalece el corazón y mejora la resistencia.</p>
+                        </div>
+                        <div class="card">
+                            <h4>💪 Martes - Fuerza</h4>
+                            <p>Ejercicios con peso corporal o pesas. Enfócate en tren superior: push-ups, pull-ups, plancha.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🧘‍♀️ Miércoles - Flexibilidad</h4>
+                            <p>Yoga o estiramientos. Mejora la movilidad y reduce la tensión muscular.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🏋️‍♀️ Jueves - Fuerza</h4>
+                            <p>Enfócate en tren inferior: sentadillas, lunges, peso muerto. Fortalece piernas y glúteos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">🤔 Pregunta: ¿Cuál es la intensidad ideal para ejercicio cardiovascular?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this)">A) 50-70% de frecuencia cardíaca máxima</div>
+                        <div class="quiz-option" onclick="selectOption(this)">B) 70-85% de frecuencia cardíaca máxima</div>
+                        <div class="quiz-option" onclick="selectOption(this)">C) 85-95% de frecuencia cardíaca máxima</div>
+                    </div>
+                    <div class="quiz-answer" style="display: none;">
+                        ✅ Respuesta correcta: B) Para beneficios cardiovasculares óptimos, ejercítate entre 70-85% de tu frecuencia cardíaca máxima (220 - tu edad).
+                    </div>
+                </div>
+
+                <div class="tips-container">
+                    <h4>💡 Motivación para Mantenerte Activo</h4>
+                    <ul>
+                        <li>Establece metas SMART (específicas, medibles, alcanzables, relevantes, temporales)</li>
+                        <li>Encuentra un compañero de ejercicio para mayor compromiso</li>
+                        <li>Varía tus rutinas para evitar el aburrimiento</li>
+                        <li>Celebra pequeños logros: completar una semana, correr sin parar 10 minutos</li>
+                        <li>Escucha música energizante o podcasts durante el ejercicio</li>
+                    </ul>
+                </div>
+
+                
+            </div>
+        </section>
+
+        <!-- Bienestar Emocional -->
+        <section id="bienestar-emocional" class="section">
+            <div class="section-header">
+                <h2>❤️ Bienestar Emocional</h2>
+                <p>Cultiva tu inteligencia emocional para una vida plena</p>
+            </div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>¿Qué es la Inteligencia Emocional?</h3>
+                    <p>La inteligencia emocional es la capacidad de reconocer, comprender y manejar nuestras propias emociones, así como las de los demás. Incluye la autoconciencia, autorregulación, motivación, empatía y habilidades sociales. Desarrollar estas habilidades mejora significativamente nuestra calidad de vida y relaciones.</p>
+                    
+                    
+                </div>
+
+                <div class="subsection">
+                    <h3>Las 5 Competencias Emocionales</h3>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h4>🔍 Autoconciencia</h4>
+                            <p>Reconocer y entender tus emociones mientras ocurren. Incluye conocer tus fortalezas, debilidades y valores.</p>
+                        </div>
+                        <div class="card">
+                            <h4>⚖️ Autorregulación</h4>
+                            <p>Manejar tus emociones de manera saludable. Adaptarte al cambio y cumplir compromisos.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🎯 Motivación</h4>
+                            <p>Dirigir tus emociones hacia metas, mantener optimismo y perseverar ante obstáculos.</p>
+                        </div>
+                        <div class="card">
+                            <h4>🤗 Empatía</h4>
+                            <p>Entender y responder apropiadamente a las emociones de otros. Base de relaciones saludables.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">🤔 Pregunta: ¿Cuál es la primera habilidad que debes desarrollar en inteligencia emocional?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" onclick="selectOption(this)">A) Empatía</div>
+                        <div class="quiz-option" onclick="selectOption(this)">B) Autoconciencia</div>
+                        <div class="quiz-option" onclick="selectOption(this)">C) Habilidades sociales</div>
+                    </div>
+                    <div class="quiz-answer" style
